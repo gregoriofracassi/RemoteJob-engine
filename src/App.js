@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import "./App.css"
+import Header from "./components/Header"
+import SearchPage from "./components/SearchPage"
+import JobDetail from "./components/JobDetail"
+import Favourites from "./components/Favourites"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    selectedJob: {},
+  }
+
+  selectJob = (job) => {
+    this.setState({ selectedJob: job })
+  }
+
+  render() {
+    return (
+      <>
+        <Router>
+          <Header />
+          <Route
+            path="/search/:query"
+            render={(props) => (
+              <SearchPage selectJob={this.selectJob} {...props} />
+            )}
+          />
+          <Route
+            path="/detail"
+            render={(props) => (
+              <JobDetail job={this.state.selectedJob} {...props} />
+            )}
+          />
+          <Route path="/favourites" component={Favourites} />
+        </Router>
+      </>
+    )
+  }
 }
 
-export default App;
+export default App

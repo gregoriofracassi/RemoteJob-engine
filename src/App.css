@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* app css */
+
+.textmd {
+  font-size: 13px;
+}
+
+.textxl {
+  font-size: 28px;
+}

@@ -1,6 +1,6 @@
 import React from "react"
 import { Navbar, Nav, Form, FormControl, Button, Image } from "react-bootstrap"
-import { withRouter } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 
 class Header extends React.Component {
   state = {
@@ -28,11 +28,15 @@ class Header extends React.Component {
               Favourites
             </Nav.Link>
           </Nav>
+          <Link to={`/search/${this.state.query}`} className="btn btn-primary">
+            Search
+          </Link>
           <Form
             inline
-            onSubmit={() =>
+            onSubmit={(e) => {
+              e.preventDefault()
               this.props.history.push(`/search/${this.state.query}`)
-            }
+            }}
           >
             <FormControl
               type="text"
@@ -40,9 +44,6 @@ class Header extends React.Component {
               className="mr-sm-2"
               onChange={this.handleChange}
             />
-            <Button variant="outline-info" type="submit">
-              Search
-            </Button>
           </Form>
         </Navbar>
       </>

@@ -21,7 +21,17 @@ class SearchPage extends React.Component {
     jobs: [],
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.getDetails()
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.match.params.query === this.props.match.params.query) return
+
+    this.getDetails()
+  }
+
+  getDetails = async () => {
     try {
       let response = await fetch(
         `https://remotive.io/api/remote-jobs?search=${this.state.query}`

@@ -23,7 +23,7 @@ class Favourites extends React.Component {
       <Container>
         <Row>
           <Col xs={8}>
-            {this.props.favourites.map((job) => {
+            {this.props.favourites.jobs.map((job) => {
               return (
                 <Card key={job.id} className="my-3">
                   <Card.Body>

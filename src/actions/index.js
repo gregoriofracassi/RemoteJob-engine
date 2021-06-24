@@ -11,6 +11,10 @@ export const removeJobFromFavourites = (job) => ({
 export const getJobsAction = (query) => {
   return async (dispatch) => {
     try {
+      dispatch({
+        type: "SET_LOADING",
+        payload: true,
+      })
       let response = await fetch(
         `https://remotive.io/api/remote-jobs?search=${query}`
       )
@@ -21,9 +25,17 @@ export const getJobsAction = (query) => {
           type: "GET_JOBS",
           payload: jobs.jobs,
         })
+        dispatch({
+          type: "SET_LOADING",
+          payload: false,
+        })
       }
     } catch (error) {
       console.log(error)
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      })
     }
   }
 }

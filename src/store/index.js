@@ -11,6 +11,7 @@ export const initialState = {
   },
   retrievedJobs: {
     jobs: [],
+    isLoading: false,
   },
 }
 
